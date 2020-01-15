@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.zcy.dao.ContentMapper">
+    <resultMap id="contentSimpleResult" type="priv.zcy.pojo.data_mapping.Content">
+        <id column="id" property="contentId"/>
+        <result column="title" property="contentTitle"/>
+        <result column="url" property="contentUrl"/>
+        <result column="img" property="contentImg"/>
+        <result column="create_date" property="contentCreateDate"/>
+        <result column="count" property="contentCount"/>
+        <result column="cid" property="channelId"/>
+    </resultMap>
+
+    <resultMap id="contentCompleteResult" type="priv.zcy.pojo.data_mapping.Content">
+        <id column="id" property="contentId"/>
+        <result column="title" property="contentTitle"/>
+        <result column="url" property="contentUrl"/>
+        <result column="img" property="contentImg"/>
+        <result column="create_date" property="contentCreateDate"/>
+        <result column="count" property="contentCount"/>
+        <result column="cid" property="channelId"/>
+        <association property="contentDetails" javaType="priv.zcy.pojo.data_mapping.Details">
+            <id column="details_id" property="detailsId"/>
+            <result column="content_id" property="content_id"/>
+            <result column="text" property="detailsText"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="detailsResult" type="priv.zcy.pojo.data_mapping.Details">
+        <id column="id" property="detailsId"/>
+        <result column="content_id" property="content_id"/>
+        <result column="text" property="detailsText"/>
+    </resultMap>
+
+    <select id="showContentList" resultMap="contentSimpleResult">
+        select * from content limit #{limit} offset #{offset}
+        <if test="id !=0">
+            <where>
+                id=#{id}
+            </where>
+        </if>
+    </select>
+
+    <select id="showContentDetails" resultMap="contentCompleteResult">
+        select content.*,details.id as details_id,details.content_id,details.text from content left join details on content.id=details.content_id
+        <where>
+            content.id = #{id}
+        </where>
+
+    </select>
+
+    <update id="modifyContentDetails" parameterType="priv.zcy.pojo.data_mapping.Content">
+        update content
+        <trim prefix="set" suffixOverrides=",">
+            <if test=" contentTitle!=null and contentTitle!='' ">
+                title=#{contentTitle},
+            </if>
+            <if test=" contentUrl!=null and contentUrl!='' ">
+                url=#{contentUrl},
+            </if>
+            <if test=" contentImg!=null and contentImg!='' ">
+                img=#{contentImg},
+            </if>
+            <if test=" contentCreateDate!=null ">
+                create_date=#{contentCreateDate},
+            </if>
+            <if test=" contentCount!=0 ">
+                count=#{contentCount},
+            </if>
+            <if test=" channelId!=0 ">
+                cid=#{channelId},
+            </if>
+        </trim>
+        <where>
+            id=#{contentId}
+        </where>
+    </update>
+
+    <insert id="newlyIncreasedContent" parameterType="priv.zcy.pojo.data_mapping.Content" useGeneratedKeys="true" keyColumn="id" keyProperty="contentId">
+        insert into content(title,url,img,create_date,count,cid)
+        values(#{contentTitle},#{contentUrl},#{contentImg},#{contentCreateDate},#{contentCount},#{channelId})
+    </insert>
+
+
+    <insert id="newlyIncreasedDetails" parameterType="priv.zcy.pojo.data_mapping.Content" useGeneratedKeys="true" keyColumn="id" keyProperty="detailsId">
+        insert into details(content_id,text) values(#{details.content_id},#{details.detailsText})
+        on duplicate  key update text=#{details.detailsText}
+    </insert>
+
+    <delete id="deleteDesignatedDetail">
+        delete from content
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+</mapper>

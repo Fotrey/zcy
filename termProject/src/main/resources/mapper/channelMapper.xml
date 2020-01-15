@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.zcy.dao.ChannelMapper">
+    <resultMap id="channelResult" type="priv.zcy.pojo.data_mapping.Channel">
+        <id column="id" property="channelId"/>
+        <result column="channelname" property="channelName"/>
+    </resultMap>
+
+    <select id="showChannelList" resultMap="channelResult">
+        select * from channel limit #{limit} offset #{offset}
+    </select>
+
+    <select id="showChannelDetalis" resultMap="channelResult">
+        select * from channel
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <insert id="newlyIncreasedChannel" parameterType="priv.zcy.pojo.data_mapping.Channel" useGeneratedKeys="true" keyColumn="id" keyProperty="channelId">
+        insert into channel(channelname) values(#{channelName})
+    </insert>
+
+    <delete id="deleteDesignatedChannel">
+        delete from channel
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+
+    <update id="modifyChannelName" parameterType="priv.zcy.pojo.data_mapping.Channel">
+        update channel set channelname=#{channelName}
+        <where>
+            id = #{channelId}
+        </where>
+    </update>
+</mapper>
