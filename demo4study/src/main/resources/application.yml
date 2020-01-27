@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    data-username: root
+    data-password: 805543
+    url: jdbc:mysql://120.24.73.91:3306/4web_dev
+    driver-class-name: com.mysql.cj.jdbc.Driver

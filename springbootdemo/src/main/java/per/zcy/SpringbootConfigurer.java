@@ -9,3 +9,4 @@ public class SpringbootConfigurer {
         SpringApplication.run(SpringbootConfigurer.class);
     }
 }
+
