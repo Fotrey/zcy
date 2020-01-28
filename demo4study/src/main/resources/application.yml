@@ -1,6 +1,31 @@
 spring:
   datasource:
-    data-username: root
-    data-password: 805543
     url: jdbc:mysql://120.24.73.91:3306/4web_dev
     driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 805543
+    type: com.alibaba.druid.pool.DruidDataSource
+    platform: mysql
+    druid:
+      initial-size: 6
+      stat-view-servlet:
+        enabled: true
+        login-username: 1762678583
+        login-password: 1762678583
+        url-pattern: /druid/*
+        reset-enable: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+    initialization-mode: always
+    schema:
+      - classpath:ddl_sql/pg_pj.sql
+      - classpath:ddl_sql/programmer.sql
+      - classpath:ddl_sql/project.sql
+
+
+server:
+  servlet:
+    context-path: /2cy
