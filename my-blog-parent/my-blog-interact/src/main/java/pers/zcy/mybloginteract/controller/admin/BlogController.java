@@ -41,17 +41,17 @@ public class BlogController {
 
     @GetMapping("/blogs")
     public String blogs(
-            @PageableDefault(size = 2, sort = {"updateTime"},
+            @PageableDefault(size = 8, sort = {"updateTime"},
                     direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
-        new Builder(model).displayTypes().displayPage(pageable, blogQuery);
-//        model.addAttribute("types",typeService.listType());
-//        model.addAttribute("page", blogService.listBlog(pageable,blogQuery));
-        return "admin/blogs";
+//        new Builder(model).displayTypes().displayPage(pageable, blogQuery);
+        model.addAttribute("types",typeService.listType());
+        model.addAttribute("page", blogService.listBlog(pageable,blogQuery));
+        return LIST;
     }
 
     @PostMapping("/blogs/search")
     public String search(
-            @PageableDefault(size = 2, sort = {"updateTime"},
+            @PageableDefault(size = 8, sort = {"updateTime"},
                     direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blogQuery, Model model){
         new Builder(model).displayPage(pageable, blogQuery);
 //        model.addAttribute("page", blogService.listBlog(pageable,blogQuery));

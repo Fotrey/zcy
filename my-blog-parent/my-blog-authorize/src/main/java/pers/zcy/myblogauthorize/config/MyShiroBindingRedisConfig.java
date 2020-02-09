@@ -11,7 +11,7 @@ import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 
 
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyShiroBindingRedisConfig {
 
+    @Value("${my.redis.host}")
     private String host = "120.24.73.91:9736";
+    @Value("${my.redis.password}")
     private String password = "ZCYbcptdtptp7600";
 
     @Bean

@@ -14,19 +14,7 @@ public class BlogSearchConditionMatchBuilder {
     public static class Builder{
         private List<Predicate> predicates = new ArrayList<>();
 
-        public Builder titleFuzzyMatch(boolean matchCondition,Predicate predicate){
-            if (matchCondition){
-                predicates.add(predicate);
-            }
-            return this;
-        }
-        public Builder typeMatch(boolean matchCondition,Predicate predicate){
-            if (matchCondition){
-                predicates.add(predicate);
-            }
-            return this;
-        }
-        public Builder isRecommendMatch(boolean matchCondition,Predicate predicate){
+        public Builder match(boolean matchCondition,Predicate predicate){
             if (matchCondition){
                 predicates.add(predicate);
             }

@@ -38,6 +38,22 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--视图层工具包-->
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark</artifactId>
+                <version>0.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark-ext-heading-anchor</artifactId>
+                <version>0.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark-ext-gfm-tables</artifactId>
+                <version>0.10.0</version>
+            </dependency>
             <!--工具包-->
             <dependency>
                 <groupId>org.projectlombok</groupId>

@@ -1,6 +1,6 @@
 package pers.zcy.myblogboot.entity;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +19,7 @@ public class Comment implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String nickName;
+    private String nickname;
     private String email;
     private String content;
     private String avatar;
@@ -31,6 +31,8 @@ public class Comment implements Serializable {
 
     @ManyToOne
     private Comment parentComment;
+
+    private boolean adminComment;
 
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> replyComments = new ArrayList<>();

@@ -56,3 +56,7 @@ spring:
       hibernate:
         enable_lazy_load_no_trans: true
     open-in-view: true
+my:
+  redis:
+    host: 120.24.73.91:9736
+    password: ZCYbcptdtptp7600

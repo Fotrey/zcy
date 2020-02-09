@@ -6,6 +6,6 @@ import lombok.Data;
 public class BlogQuery {
 
     private String title;
-    private Long id;
+    private Long typeId;
     private boolean recommend;
 }
